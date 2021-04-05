@@ -107,7 +107,7 @@ class StudentCourseController extends Controller
                     ->where('student_courses.subject_id' ,'=', $id)
                     ->get();
 
-        //get all students list
+        //get all students list (not in subject)
         $all_students = DB::table('students')->get();
 
         return view('courses.show', compact('subject', 'students', 'all_students'));

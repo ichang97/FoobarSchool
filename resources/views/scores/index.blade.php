@@ -23,7 +23,7 @@
                 <td class="text-center">{{$value->class_name}}/{{$value->room_no}}</td>
                 <td>
                     <div class="text-center">
-                        <a href="{{route('scores.show', $value->id)}}" class="btn btn-primary">View scores</a>
+                        <a href="{{route('scores.show', $value->id)}}" class="btn btn-primary"><i class="fas fa-eye"></i> View scores</a>
                     </div>
                 </td>
             </tr>

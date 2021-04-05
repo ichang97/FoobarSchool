@@ -18,12 +18,12 @@
     });
 </script>
 
-<a href="{{route('courses.index')}}" class="btn btn-primary btn-block">Back</a><br />
+<a href="{{route('courses.index')}}" class="btn btn-primary btn-block"><i class="fas fa-arrow-left"></i> Back</a><br />
 
     <div class="card shadow">
         <div class="card-header bg-warning">
             @foreach($subject as $subject_item)
-            <h5 class="h5 text-center">[{{$subject_item->subject_code}}] {{$subject_item->subject_name}}</h5>
+            <h5 class="h5 text-center"><i class="fas fa-book"></i> [{{$subject_item->subject_code}}] {{$subject_item->subject_name}}</h5>
             @endforeach
         </div>
     </div><br />
@@ -42,7 +42,7 @@
             <input hidden value="{{$subject_item->subject_id}}" id="txt_subjectid" name="txt_subjectid">
             @endforeach
             <div class="input-group-append">
-                <button class="btn btn-success" type="submit" id="btn_addstudent">Add student</button>
+                <button class="btn btn-success" type="submit" id="btn_addstudent"><i class="fa fa-plus"></i> Add student</button>
             </div>
         </div>
     </form>

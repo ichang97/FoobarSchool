@@ -2,11 +2,6 @@
 
 @section('content')
 <div class="container">
-<script>
-    $(document).ready(function(){
-        $('#tbl_classrooms').DataTable();
-    });
-</script>
 @if(session('result'))
 <script>
     Swal.fire(
@@ -16,29 +11,34 @@
     )
 </script>
 @endif
-    <a class="btn btn-success" href="{{route('classrooms.create')}}">Add Classroom</a><br /><br />
+    <a class="btn btn-success" href="{{route('classrooms.create')}}"><i class="fa fa-plus"></i> Add Classroom</a><br /><br />
 
-    <table class="table table-hover" id="tbl_classrooms">
-        <thead class="text-center">
-            <th>#</th>
-            <th>Classname</th>
-            <th>Room Number</th>
-            <th>Action</th>
-        </thead>
-        <tbody>
-            @foreach($classrooms as $key => $value)
-            <tr>
-                <td class="text-center">{{$key + 1}}</td>
-                <td class="text-center">{{$value->class_name}}</td>
-                <td class="text-center">{{$value->room_no}}</td>
-                <td>
-                    <div class="text-center">
-                    
-                    </div>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    @php
+        $rows = 3;
+        $count = 0;
+    @endphp
+    <div class="row row-cols-3">
+        @foreach($classrooms as $class_item)
+        <div class="col">
+            <div class="alert alert-primary shadow text-center h5">
+                <i class="fas fa-user-friends display-3"></i><br /><br />
+
+                {{$class_item->class_name}}/{{$class_item->room_no}}<br />
+                @if($class_item->student_count != 0)
+                    Student counts : {{$class_item->student_count}}
+                @else
+                    No Student.
+                @endif
+            </div>
+        </div>
+    @php
+        $count++;
+    @endphp
+
+    @if($count % $rows == 0)
+    </div><div class="row row-cols-3">
+    @endif
+
+    @endforeach
 </div>
 @endsection

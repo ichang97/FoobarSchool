@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-<a class="btn btn-success btn-block" href="{{route('scores.index')}}">Back</a><br />
+<a class="btn btn-success btn-block" href="{{route('scores.index')}}"><i class="fas fa-arrow-left"></i> Back</a><br />
     <div class="card shadow">
         <div class="card-header bg-primary text-white text-center">
             @foreach ($student as $student_item)
@@ -28,7 +28,7 @@
                     <form action="{{route('scores.update', $value->course_id)}}" method="post" id="frm_scores{{$value->course_id}}">
                     @csrf
                     @method('PUT')
-                        <input class="form-control text-center" type="number" id="txt_score{{$value->course_id}}" name="txt_score{{$value->course_id}}" max="100" required>
+                        <input class="form-control text-center" type="number" id="txt_score{{$value->course_id}}" name="txt_score{{$value->course_id}}" max="100" min="0" required>
                         <input hidden value="{{$value->course_id}}" type="text" id="txt_courseid{{$value->course_id}}" name="txt_courseid{{$value->course_id}}">
                     </div>
                     </form>
@@ -38,7 +38,7 @@
                 </td>
                 <td class="text-center">
                     @if($value->score == 0)
-                    <a href="Javascript: ConfirmGrade{{$value->course_id}}()" class="btn btn-success" id="btn_save{{$value->course_id}}">Confirm</a>
+                    <a href="Javascript: ConfirmGrade{{$value->course_id}}()" class="btn btn-success" id="btn_save{{$value->course_id}}"><i class="fas fa-check"></i> Confirm</a>
                     @else
                         @if ($value->score >= 80)
                             A
@@ -68,6 +68,10 @@
                             if($('#txt_score{{$value->course_id}}').val() == '' || $('#txt_score{{$value->course_id}}').val() == 0){
                                 Swal.fire(
                                     'Error', 'Please enter score.', 'error'
+                                )
+                            }else if($('#txt_score{{$value->course_id}}').val() < 0){
+                                Swal.fire(
+                                    'Error', 'Please enter score on positive number only.', 'error'
                                 )
                             }else if($('#txt_score{{$value->course_id}}').val() > 100){
                                 Swal.fire(

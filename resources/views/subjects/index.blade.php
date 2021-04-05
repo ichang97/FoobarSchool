@@ -11,34 +11,30 @@
         )
     </script>
 @endif
-<script>
-    $(document).ready(function(){
-        $('#tbl_subjects').DataTable();
-    });
-</script>
-    <a class="btn btn-success" href="{{route('subjects.create')}}">Add subject</a><br /><br />
+    <a class="btn btn-success" href="{{route('subjects.create')}}"><i class="fa fa-plus"></i> Add subject</a><br /><br />
 
-    <table class="table table-hover" id="tbl_subjects">
-        <thead class="text-center">
-            <th>#</th>
-            <th>Subject Code</th>
-            <th>Subject name</th>
-            <th>Action</th>
-        </thead>
-        <tbody>
-            @foreach($subjects as $key => $value)
-            <tr>
-                <td class="text-center">{{$key + 1}}</td>
-                <td class="text-center">{{$value->subject_code}}</td>
-                <td class="text-center">{{$value->subject_name}}</td>
-                <td>
-                    <div class="text-center">
-                    
-                    </div>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    @php
+        $rows = 3;
+        $count = 0;
+    @endphp
+    <div class="row row-cols-3">
+        @foreach($subjects as $subject_item)
+        <div class="col">
+            <div class="alert alert-primary shadow text-center h5">
+                <i class="fas fa-book display-3"></i><br /><br />
+
+                [{{$subject_item->subject_code}}]<br />
+                {{$subject_item->subject_name}}
+            </div>
+        </div>
+    @php
+        $count++;
+    @endphp
+
+    @if($count % $rows == 0)
+    </div><div class="row row-cols-3">
+    @endif
+
+    @endforeach
 </div>
 @endsection

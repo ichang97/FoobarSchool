@@ -79,6 +79,7 @@ class StudentScoreController extends Controller
                     ->leftjoin('students', 'student_courses.student_id', '=', 'students.id')
                     ->leftjoin('student_scores', 'student_courses.id', '=', 'student_scores.course_id')
                     ->where('student_courses.student_id', '=', $id)
+                    ->orderby('student_courses.id','asc')
                     ->get();
 
         return view('scores.show')

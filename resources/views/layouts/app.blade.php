@@ -30,10 +30,13 @@
     <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/jquery.dataTables.min.js') }}" defer></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}" defer></script>
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/b3dec1c31c.js" crossorigin="anonymous" defer></script>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-success shadow">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}

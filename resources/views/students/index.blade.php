@@ -17,9 +17,10 @@
     });
 </script>
 
-    <a class="btn btn-success" href="{{route('students.create')}}">Add Student</a><br /><br />
+    <a class="btn btn-success" href="{{route('students.create')}}"><i class="fa fa-plus"></i> Add Student</a><br /><br />
 
     @if(count($students) != 0)
+
     <table class="table table-hover" id="tbl_students">
         <thead class="text-center">
             <th>#</th>
@@ -38,9 +39,9 @@
                 <td>
 <div class="text-center">
 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editmodal{{$value->id}}">
-    Edit
+  <i class="fas fa-edit"></i> Edit
   </button>
-<a class="btn btn-danger" href="Javascript: DeletePopup{{$value->id}}();" id="btn_del{{$value->id}}">Delete</a>
+<a class="btn btn-danger" href="Javascript: DeletePopup{{$value->id}}();" id="btn_del{{$value->id}}"><i class="fas fa-trash-alt"></i> Delete</a>
 <form action="{{route('students.destroy', $value->id)}}" method="POST" id="frm_del{{$value->id}}">
     @csrf
     @method('DELETE')
@@ -105,7 +106,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <button class="btn btn-warning btn-block" type="submit" id="btn_edit{{$value->id}}">Edit</button>
+                <button class="btn btn-warning btn-block" type="submit" id="btn_edit{{$value->id}}"><i class="fas fa-edit"></i> Edit</button>
             </div>
           </form>
         </div>

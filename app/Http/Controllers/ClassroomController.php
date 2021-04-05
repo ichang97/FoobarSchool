@@ -21,7 +21,15 @@ class ClassroomController extends Controller
     public function index()
     {
         //get classrooms data
-        $classrooms = DB::table('classrooms')->get();
+        $classrooms = DB::table('classrooms')
+                    ->select(
+                        'classrooms.id', 'classrooms.class_name', 'classrooms.room_no',
+                        DB::raw('count(students.classroom_id) as student_count')
+                    )
+                    ->leftjoin('students', 'students.classroom_id', '=', 'classrooms.id')
+                    ->groupby('classrooms.id','classrooms.class_name','classrooms.room_no')
+                    ->get();
+
         return view('classrooms.index')->with('classrooms', $classrooms);
     }
 
