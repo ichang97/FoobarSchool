@@ -37,7 +37,7 @@
                 </td>
                 <td>
                     <div class="text-center">
-                    <a class="btn btn-primary" href="#">View</a>
+                    <a class="btn btn-primary" href="{{route('courses.show',$value->id)}}">View</a>
                     </div>
                 </td>
             </tr>

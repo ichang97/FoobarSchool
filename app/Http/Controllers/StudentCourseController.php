@@ -51,7 +51,35 @@ class StudentCourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //check duplicate
+        $search = DB::table('student_courses')
+                    ->where('student_id', '=', $request->txt_student)
+                    ->where('subject_id', '=', $request->txt_subjectid)
+                    ->get();
+        
+        if(count($search) != 0){
+            $result = [
+                'title' => 'Error!!',
+                'msg' => 'Student is exist for this subject.',
+                'type' => 'error'
+            ];
+        }else{
+            $course = DB::table('student_courses')->insert([
+                'student_id' => $request->txt_student,
+                'subject_id' => $request->txt_subjectid,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+            $result = [
+                'title' => 'Success!!',
+                'msg' => 'Add course for student completed.',
+                'type' => 'success'
+            ];
+        }
+
+        return redirect()->route('courses.show', $request->txt_subjectid)->with('result', $result);
+        
     }
 
     /**
@@ -62,7 +90,27 @@ class StudentCourseController extends Controller
      */
     public function show($id)
     {
-        //
+        //get subject name
+        $subject = DB::table('subjects')
+                    ->select('subjects.subject_code', 'subjects.subject_name', 'subjects.id as subject_id')
+                    ->where('id', '=', $id)
+                    ->get();
+
+        //get student in course
+        $students = DB::table('students')
+                    ->select(
+                        'students.id as student_id', 'students.firstname', 'students.lastname', 'students.code',
+                        'classrooms.class_name', 'classrooms.room_no'
+                    )
+                    ->leftjoin('student_courses','students.id', '=', 'student_courses.student_id')
+                    ->leftjoin('classrooms','students.classroom_id', '=', 'classrooms.id')
+                    ->where('student_courses.subject_id' ,'=', $id)
+                    ->get();
+
+        //get all students list
+        $all_students = DB::table('students')->get();
+
+        return view('courses.show', compact('subject', 'students', 'all_students'));
     }
 
     /**
