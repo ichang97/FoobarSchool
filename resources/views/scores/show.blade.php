@@ -79,10 +79,13 @@
                                 Swal.fire(
                                     'Error', 'Please enter score on positive number only.', 'error'
                                 )
+                                $('#txt_score{{$value->course_id}}').val('');
                             }else if($('#txt_score{{$value->course_id}}').val() > 100){
                                 Swal.fire(
                                     'Error', 'Score must be maximum = 100', 'error'
                                 )
+                                $('#txt_score{{$value->course_id}}').val('');
+                                
                             }else{
                                 Swal.fire({
                                 title: 'Confirm Grade ?<br>[{{$value->subject_code}}] : {{$value->subject_name}}',
