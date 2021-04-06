@@ -12,13 +12,15 @@
     </script>
 @endif
 
+<input class="form-control" type="text" id="txt_search" placeholder="Search..."><br />
+
 @php
         $rows = 3;
         $count = 0;
     @endphp
-    <div class="row row-cols-3">
+    <div class="row">
         @foreach($subjects as $subject_item)
-        <div class="col">
+        <div class="col" data-role="courses">
             <div class="alert alert-primary shadow text-center h5">
                 <i class="fas fa-users display-3"></i><br />
 
@@ -38,10 +40,21 @@
     @endphp
 
     @if($count % $rows == 0)
-    </div><div class="row row-cols-3">
+    </div><div class="row">
     @endif
 
     @endforeach
+
+    <script>
+        $(document).ready(function(){
+            $('#txt_search').on("keyup", function(){
+            var value = $(this).val().toLowerCase();
+            $('div[data-role="courses"]').filter(function(){
+                $(this).toggle($(this).find('div').text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+        });
+    </script>
 
 </div>
 @endsection
