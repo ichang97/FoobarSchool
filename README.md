@@ -16,6 +16,7 @@
     <li>jQuery</li>
     <li>Sweetalert2</li>
     <li>DataTable</li>
+    <li>FontAwesome</li>
 </ul>
 
 <br />
