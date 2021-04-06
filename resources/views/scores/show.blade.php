@@ -64,6 +64,12 @@
                             $('#frm_scores{{$value->course_id}}').submit();
                         }
 
+                        $('#txt_score{{$value->course_id}}').on('keypress',function(e){
+                            if(e.which == 13){
+                                ConfirmGrade{{$value->course_id}}();
+                            }
+                        });
+
                         function ConfirmGrade{{$value->course_id}}(){
                             if($('#txt_score{{$value->course_id}}').val() == '' || $('#txt_score{{$value->course_id}}').val() == 0){
                                 Swal.fire(
