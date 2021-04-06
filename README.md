@@ -17,3 +17,6 @@
     <li>Sweetalert2</li>
     <li>DataTable</li>
 </ul>
+
+<br />
+<b>Made with ❤ By MarkAyinomoto.</b>
